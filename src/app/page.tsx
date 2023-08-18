@@ -26,7 +26,7 @@ export default function Home() {
       <h1>INSOMNIA</h1>
       <form action="" onSubmit={(e) => handleSubmit(e)}>
         <div>
-          <label htmlFor="time-for-bed">入床</label>
+          <label htmlFor="time-for-bed">布団に入った時間</label>
           <input
             onChange={(e) => setTimeForBed(e.target.value)}
             value={timeForBed}
@@ -37,7 +37,7 @@ export default function Home() {
           />
         </div>
         <div>
-          <label htmlFor="wake-up-time">出床</label>
+          <label htmlFor="wake-up-time">布団から出た時間</label>
           <input
             onChange={(e) => setWakeUpTime(e.target.value)}
             value={wakeUpTime}
