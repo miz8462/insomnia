@@ -7,8 +7,8 @@ export default function Home() {
   const [sleepTime, setSleepTime] = useState<number>(0);
   const [numberOfAwaking, setNumberOfAwaking] = useState<number>(0);
   const [timeOfAwaking, setTimeOfAwaking] = useState<number>(0);
-  const [morningFeeling, setMorningFeeling] = useState<number>(0);
-  const [qualityOfSleep, setQualityOfSleep] = useState<number>(0);
+  const [morningFeeling, setMorningFeeling] = useState<number>(1);
+  const [qualityOfSleep, setQualityOfSleep] = useState<number>(1);
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
@@ -53,6 +53,8 @@ export default function Home() {
             onChange={(e) => setSleepTime(Number(e.target.value))}
             value={sleepTime}
             type="number"
+            min="0"
+            max="1000"
             id="sleep-time"
             name="sleep-time"
             required
@@ -64,39 +66,47 @@ export default function Home() {
             onChange={(e) => setNumberOfAwaking(Number(e.target.value))}
             value={numberOfAwaking}
             type="number"
+            min="0"
+            max="1000"
             id="number-of-awaking"
             name="number-of-awaking"
             required
           />
         </div>
         <div>
-          <label htmlFor="time-of-awaking">夜中に目覚めていた時間</label>
+          <label htmlFor="time-of-awaking">夜中に目覚めていた時間（分）</label>
           <input
             onChange={(e) => setTimeOfAwaking(Number(e.target.value))}
             value={timeOfAwaking}
             type="number"
+            min="0"
+            max="1000"
             id="time-of-awaking"
             name="time-of-awaking"
             required
           />
         </div>
         <div>
-          <label htmlFor="morning-feeling">朝の気分</label>
+          <label htmlFor="morning-feeling">朝の気分（5段階評価）</label>
           <input
             onChange={(e) => setMorningFeeling(Number(e.target.value))}
             value={morningFeeling}
             type="number"
+            min="1"
+            max="5"
             id="morning-feeling"
             name="morning-feeling"
             required
           />
         </div>
         <div>
-          <label htmlFor="quality-of-sleep">睡眠の質</label>
+          <label htmlFor="quality-of-sleep">睡眠の質（5段階評価）</label>
           <input
             onChange={(e) => setQualityOfSleep(Number(e.target.value))}
             value={qualityOfSleep}
             type="number"
+            min="1"
+            max="5"
             id="quality-of-sleep"
             name="quality-of-sleep"
             required
