@@ -7,6 +7,7 @@ import SubmitButton from "./SubmitButton";
 import TimeForBed from "./TimeForBed";
 import TimeOfAwaking from "./TimeOfAwaking";
 import WakeUpTime from "./WakeUpTime";
+import LabelAndInput from "./LabelAndInput";
 
 const Form = () => {
   const [timeForBed, setTimeForBed] = useState<string>("00:00");
@@ -30,7 +31,7 @@ const Form = () => {
   };
   return (
     <div>
-      <form action="" onSubmit={(e) => handleSubmit(e)}>
+      <form  className="flex flex-col " action="" onSubmit={(e) => handleSubmit(e)}>
         <TimeForBed timeForBed={timeForBed} setTimeForBed={setTimeForBed} />
         <WakeUpTime wakeUpTime={wakeUpTime} setWakeUpTime={setWakeUpTime} />
         <SleepTime sleepTime={sleepTime} setSleepTime={setSleepTime} />

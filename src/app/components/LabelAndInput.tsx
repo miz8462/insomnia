@@ -1,15 +1,8 @@
-// props: anyは要修正
-
-import Label from "./Label";
-
-
-
-const TimeForBed = (props: any) => {
+const LabelAndInput = (props: any) => {
   const { timeForBed, setTimeForBed } = props;
   return (
     <div className="flex flex-col  w-60 py-4">
-      <Label htmlFor="time-for-bed" title={"布団に入った時間"} />
-      
+      <label htmlFor="time-for-bed">布団に入った時間</label>
       <input
         onChange={(e) => setTimeForBed(e.target.value)}
         value={timeForBed}
@@ -22,4 +15,4 @@ const TimeForBed = (props: any) => {
   );
 };
 
-export default TimeForBed;
+export default LabelAndInput;
