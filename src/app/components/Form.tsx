@@ -21,13 +21,11 @@ const Form = () => {
     e.preventDefault();
     console.log(timeForBed);
     console.log(wakeUpTime);
-    console.log(typeof sleepTime);
     console.log(sleepTime);
-    // console.log(numberOfAwaking);
-    // console.log(timeOfAwaking);
-    // console.log(typeof(morningFeeling));
+    console.log(numberOfAwaking);
+    console.log(timeOfAwaking);
     console.log(morningFeeling);
-    // console.log(qualityOfSleep);
+    console.log(qualityOfSleep);
   };
   return (
     <div>
