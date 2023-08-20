@@ -1,4 +1,4 @@
-import { InputNumberProps } from "../../types";
+import { InputNumberProps } from "../../types/types";
 import LabelAndInputNumber from "../molecules/LabelAndInputNumber";
 
 const NumberOfAwaking = (props: InputNumberProps) => {
