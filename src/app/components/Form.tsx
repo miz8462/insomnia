@@ -1,13 +1,12 @@
 import { useState } from "react";
-import MorningFeeling from "./MorningFeeling";
-import NumberOfAwaking from "./NumberOfAwaking";
-import QualityOfSleep from "./QualityOfSleep";
-import SleepTime from "./SleepTime";
 import SubmitButton from "./SubmitButton";
-import TimeForBed from "./TimeForBed";
-import TimeOfAwaking from "./TimeOfAwaking";
-import WakeUpTime from "./WakeUpTime";
-import LabelAndInput from "./LabelAndInput";
+import MorningFeeling from "./organisms/MorningFeeling";
+import NumberOfAwaking from "./organisms/NumberOfAwaking";
+import QualityOfSleep from "./organisms/QualityOfSleep";
+import SleepTime from "./organisms/SleepTime";
+import TimeForBed from "./organisms/TimeForBed";
+import TimeOfAwaking from "./organisms/TimeOfAwaking";
+import WakeUpTime from "./organisms/WakeUpTime";
 
 const Form = () => {
   const [timeForBed, setTimeForBed] = useState<string>("00:00");
@@ -20,36 +19,38 @@ const Form = () => {
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
-    // console.log(timeForBed);
+    console.log(timeForBed);
     console.log(wakeUpTime);
-    // console.log(typeof sleepTime);
-    // console.log(sleepTime);
+    console.log(typeof sleepTime);
+    console.log(sleepTime);
     // console.log(numberOfAwaking);
     // console.log(timeOfAwaking);
-    // console.log(morningFeeling);
+    // console.log(typeof(morningFeeling));
+    console.log(morningFeeling);
     // console.log(qualityOfSleep);
   };
   return (
     <div>
-      <form  className="flex flex-col " action="" onSubmit={(e) => handleSubmit(e)}>
-        <TimeForBed timeForBed={timeForBed} setTimeForBed={setTimeForBed} />
-        <WakeUpTime wakeUpTime={wakeUpTime} setWakeUpTime={setWakeUpTime} />
-        <SleepTime sleepTime={sleepTime} setSleepTime={setSleepTime} />
+      <form
+        className="flex flex-col "
+        action=""
+        onSubmit={(e) => handleSubmit(e)}
+      >
+        <TimeForBed stateName={timeForBed} setState={setTimeForBed} />
+        <WakeUpTime stateName={wakeUpTime} setState={setWakeUpTime} />
+        <SleepTime stateName={sleepTime} setState={setSleepTime} />
         <NumberOfAwaking
-          numberOfAwaking={numberOfAwaking}
-          setNumberOfAwaking={setNumberOfAwaking}
+          stateName={numberOfAwaking}
+          setState={setNumberOfAwaking}
         />
-        <TimeOfAwaking
-          timeOfAwaking={timeOfAwaking}
-          setTimeOfAwaking={setTimeOfAwaking}
-        />
+        <TimeOfAwaking stateName={timeOfAwaking} setState={setTimeOfAwaking} />
         <MorningFeeling
-          morningFeeling={morningFeeling}
-          setMorningFeeling={setMorningFeeling}
+          stateName={morningFeeling}
+          setState={setMorningFeeling}
         />
         <QualityOfSleep
-          qualityOfSleep={qualityOfSleep}
-          setQualityOfSleep={setQualityOfSleep}
+          stateName={qualityOfSleep}
+          setState={setQualityOfSleep}
         />
         <SubmitButton />
       </form>
