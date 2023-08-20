@@ -1,12 +1,7 @@
-import { Dispatch, SetStateAction } from "react";
 import LabelAndInputString from "../molecules/LabelAndInput";
+import { InputStringProps } from "@/app/types/types";
 
-type Props = {
-  stateName: string;
-  setState: Dispatch<SetStateAction<string>>;
-};
-
-const TimeForBed = (props: Props) => {
+const TimeForBed = (props: InputStringProps) => {
   const { stateName, setState } = props;
   return (
     <div>

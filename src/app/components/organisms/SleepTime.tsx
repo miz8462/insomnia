@@ -1,4 +1,4 @@
-import { InputNumberProps } from "@/app/types";
+import { InputNumberProps } from "@/app/types/types";
 import LabelAndInputNumber from "../molecules/LabelAndInputNumber";
 
 const SleepTime = (props: InputNumberProps) => {
