@@ -1,12 +1,4 @@
-import { Dispatch, SetStateAction } from "react";
-
-type InputStringProps = {
-  type: string;
-  id: string;
-  name: string;
-  stateName: string;
-  setState: Dispatch<SetStateAction<string>>;
-};
+import { InputStringProps } from "@/app/types/types";
 
 const InputString = (props: InputStringProps) => {
   const { type, id, name, stateName, setState } = props;

@@ -1,7 +1,7 @@
-import { InputNumberProps } from "@/app/types/types";
+import { UseStateNumberProps } from "@/app/types/types";
 import LabelAndInputNumber from "../molecules/LabelAndInputNumber";
 
-const TimeOfAwaking = (props: InputNumberProps) => {
+const TimeOfAwaking = (props: UseStateNumberProps) => {
   const { stateName, setState } = props;
   return (
     <div>

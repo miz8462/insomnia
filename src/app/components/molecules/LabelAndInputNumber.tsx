@@ -1,18 +1,6 @@
-import { Dispatch, SetStateAction } from "react";
+import { LabelAndInputNumberProps } from "@/app/types/types";
 import InputNumber from "../atom/InputNumber";
 import Label from "../atom/Label";
-
-type LabelAndInputNumberProps = {
-  type: string;
-  id: string;
-  name: string;
-  title: string;
-  htmlFor: string;
-  stateName: number;
-  setState: Dispatch<SetStateAction<number>>;
-  min?: number;
-  max?: number;
-};
 
 const LabelAndInputNumber = (props: LabelAndInputNumberProps) => {
   const { type, id, name, title, htmlFor, stateName, setState, min, max } =

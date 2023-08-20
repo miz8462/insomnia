@@ -1,7 +1,7 @@
-import { InputStringProps } from "@/app/types/types";
+import { UseStateStringProps } from "@/app/types/types";
 import LabelAndInputString from "../molecules/LabelAndInput";
 
-const WakeUpTime = (props: InputStringProps) => {
+const WakeUpTime = (props: UseStateStringProps) => {
   const { stateName, setState } = props;
   return (
     <div>

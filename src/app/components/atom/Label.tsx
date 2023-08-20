@@ -1,7 +1,4 @@
-type LabelProps = {
-  htmlFor: string;
-  title: string;
-};
+import { LabelProps } from "@/app/types/types";
 
 const Label = (props: LabelProps) => {
   const { htmlFor, title } = props;

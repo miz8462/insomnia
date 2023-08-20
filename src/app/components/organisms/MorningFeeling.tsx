@@ -1,7 +1,7 @@
-import { InputNumberProps } from "@/app/types/types";
+import { UseStateNumberProps } from "@/app/types/types";
 import LabelAndInputNumber from "../molecules/LabelAndInputNumber";
 
-const MorningFeeling = (props: InputNumberProps) => {
+const MorningFeeling = (props: UseStateNumberProps) => {
   const { stateName, setState } = props;
   return (
     <div>

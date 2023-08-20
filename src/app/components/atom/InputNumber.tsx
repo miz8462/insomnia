@@ -1,14 +1,4 @@
-import { Dispatch, SetStateAction } from "react";
-
-type InputNumberProps = {
-  type: string;
-  id: string;
-  name: string;
-  stateName: number;
-  setState: Dispatch<SetStateAction<number>>;
-  min?: number;
-  max?: number;
-};
+import { InputNumberProps } from "@/app/types/types";
 
 const InputNumber = (props: InputNumberProps) => {
   const { type, id, name, stateName, setState, min, max } = props;
