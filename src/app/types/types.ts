@@ -54,3 +54,15 @@ export type InputNumberProps = {
   min?: number;
   max?: number;
 };
+
+export type Record = {
+  id: number;
+  created_at: string;
+  time_to_bed: string;
+  wake_up_time: string;
+  number_of_awaking: number;
+  sleep_time: number;
+  time_of_awaking: number;
+  morning_feeling: number;
+  quality_of_sleep: number;
+};

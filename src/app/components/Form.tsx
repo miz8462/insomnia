@@ -1,5 +1,5 @@
 import { useState } from "react";
-import SubmitButton from "./SubmitButton";
+import SubmitButton from "./atom/SubmitButton";
 import MorningFeeling from "./organisms/MorningFeeling";
 import NumberOfAwaking from "./organisms/NumberOfAwaking";
 import QualityOfSleep from "./organisms/QualityOfSleep";
