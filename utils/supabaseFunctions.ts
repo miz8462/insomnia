@@ -16,15 +16,13 @@ export const addRecord = async (
 ) => {
   console.log(timeToBed);
 
-  await supabase
-    .from("INSOMNIA_RECORDS")
-    .insert({
-      time_to_bed: timeToBed,
-      wake_up_time: wakeUpTime,
-      number_of_awaking: numberOfAwaking,
-      sleep_time: sleepTime,
-      time_of_awaking: timeOfAwaking,
-      morning_feeling: morningFeeling,
-      quality_of_sleep: qualityOfSleep,
-    });
+  await supabase.from("INSOMNIA_RECORDS").insert({
+    time_to_bed: timeToBed,
+    wake_up_time: wakeUpTime,
+    number_of_awaking: numberOfAwaking,
+    sleep_time: sleepTime,
+    time_of_awaking: timeOfAwaking,
+    morning_feeling: morningFeeling,
+    quality_of_sleep: qualityOfSleep,
+  });
 };
