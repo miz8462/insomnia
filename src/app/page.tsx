@@ -1,10 +1,9 @@
 "use client";
 import { useEffect, useState } from "react";
 import { getAllRecords } from "../../utils/supabaseFunctions";
-import RecordList from "./RecordList";
 import Form from "./components/Form";
 import Header from "./components/Header";
-import { Record } from "./types/types";
+import RecordList from "./components/RecordList";
 
 export default function Home() {
   // Todo: any型を直す
@@ -13,7 +12,6 @@ export default function Home() {
     const getRecords = async () => {
       const records = await getAllRecords();
       setRecords(records);
-      console.log(records);
     };
     getRecords();
   }, []);

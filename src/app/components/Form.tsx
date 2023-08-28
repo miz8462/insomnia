@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { FormEvent, useState } from "react";
+import { addRecord } from "../../../utils/supabaseFunctions";
 import SubmitButton from "./atom/SubmitButton";
 import MorningFeeling from "./organisms/MorningFeeling";
 import NumberOfAwaking from "./organisms/NumberOfAwaking";
@@ -9,7 +10,7 @@ import TimeOfAwaking from "./organisms/TimeOfAwaking";
 import WakeUpTime from "./organisms/WakeUpTime";
 
 const Form = () => {
-  const [timeForBed, setTimeForBed] = useState<string>("00:00");
+  const [timeToBed, setTimeToBed] = useState<string>("00:00");
   const [wakeUpTime, setWakeUpTime] = useState<string>("07:00");
   const [sleepTime, setSleepTime] = useState<number>(0);
   const [numberOfAwaking, setNumberOfAwaking] = useState<number>(0);
@@ -17,15 +18,18 @@ const Form = () => {
   const [morningFeeling, setMorningFeeling] = useState<number>(1);
   const [qualityOfSleep, setQualityOfSleep] = useState<number>(1);
 
-  const handleSubmit = (e: any) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(timeForBed);
-    console.log(wakeUpTime);
-    console.log(sleepTime);
-    console.log(numberOfAwaking);
-    console.log(timeOfAwaking);
-    console.log(morningFeeling);
-    console.log(qualityOfSleep);
+
+    addRecord(
+      timeToBed,
+      wakeUpTime,
+      sleepTime,
+      numberOfAwaking,
+      timeOfAwaking,
+      morningFeeling,
+      qualityOfSleep
+    );
   };
   return (
     <div>
@@ -34,7 +38,7 @@ const Form = () => {
         action=""
         onSubmit={(e) => handleSubmit(e)}
       >
-        <TimeForBed stateName={timeForBed} setState={setTimeForBed} />
+        <TimeForBed stateName={timeToBed} setState={setTimeToBed} />
         <WakeUpTime stateName={wakeUpTime} setState={setWakeUpTime} />
         <SleepTime stateName={sleepTime} setState={setSleepTime} />
         <NumberOfAwaking
