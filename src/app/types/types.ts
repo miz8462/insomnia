@@ -57,12 +57,12 @@ export type InputNumberProps = {
 
 export type Record = {
   id: number;
-  created_at: string;
-  time_to_bed: string;
-  wake_up_time: string;
-  number_of_awaking: number;
-  sleep_time: number;
-  time_of_awaking: number;
-  morning_feeling: number;
-  quality_of_sleep: number;
+  createdAt: string;
+  timeToBed: string;
+  wakeUpTime: string;
+  sleepTime: number;
+  numberOfAwaking: number;
+  timeOfAwaking: number;
+  morningFeeling: number;
+  qualityOfSleep: number;
 };

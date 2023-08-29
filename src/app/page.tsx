@@ -4,6 +4,7 @@ import { getAllRecords } from "../../utils/supabaseFunctions";
 import Form from "./components/Form";
 import Header from "./components/Header";
 import RecordList from "./components/RecordList";
+import RecordTable from "./components/RecordTable";
 
 export default function Home() {
   // Todo: any型を直す
@@ -20,7 +21,8 @@ export default function Home() {
       <Header />
       <div className="flex">
         <Form />
-        <RecordList records={records} />
+        <RecordTable />
+        {/* <RecordList records={records} /> */}
       </div>
     </main>
   );
