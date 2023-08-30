@@ -6,6 +6,7 @@ import {
 } from "@tanstack/react-table";
 import { useState } from "react";
 import { Record } from "../types/types";
+import { Transform } from "stream";
 
 const insomniaRecords: Record[] = [
   {
@@ -36,27 +37,35 @@ const columnHelper = createColumnHelper<Record>();
 
 const columns = [
   columnHelper.accessor("createdAt", {
+    header: "日付",
     cell: (info) => info.getValue(),
   }),
   columnHelper.accessor("timeToBed", {
+    header: "布団に入った時間",
     cell: (info) => info.getValue(),
   }),
   columnHelper.accessor("wakeUpTime", {
+    header: "布団から出た時間",    
     cell: (info) => info.getValue(),
   }),
   columnHelper.accessor("sleepTime", {
+    header: "眠るまでの時間",
     cell: (info) => info.getValue(),
   }),
   columnHelper.accessor("numberOfAwaking", {
+    header: "夜中に目覚めた回数",
     cell: (info) => info.getValue(),
   }),
   columnHelper.accessor("timeOfAwaking", {
+    header: "夜中に目覚めていた時間",
     cell: (info) => info.getValue(),
   }),
   columnHelper.accessor("morningFeeling", {
+    header: "起きた時の気分",
     cell: (info) => info.getValue(),
   }),
   columnHelper.accessor("qualityOfSleep", {
+    header: "睡眠の質",
     cell: (info) => info.getValue(),
   }),
 ];
@@ -70,34 +79,36 @@ const RecordTable = () => {
     getCoreRowModel: getCoreRowModel(),
   });
 
+  // const transposedTable = transpose(table);
+
   return (
-    <div className="p-2">
-      <table>
-        <thead>
+    <div className="p-1">
+      <table className="px-3 py-1 flex border-2 border-sky-600 rounded-lg">
+        <thead className="px-2">
           {table.getHeaderGroups().map((headerGroup) => (
-            <tr key={headerGroup.id}>
+            <th key={headerGroup.id}>
               {headerGroup.headers.map((header) => (
-                <th key={header.id}>
+                <tr className="truncate" key={header.id}>
                   {header.isPlaceholder
                     ? null
                     : flexRender(
                         header.column.columnDef.header,
                         header.getContext()
                       )}
-                </th>
+                </tr>
               ))}
-            </tr>
+            </th>
           ))}
         </thead>
         <tbody>
           {table.getRowModel().rows.map((row) => (
-            <tr key={row.id}>
+            <th className="px-2 border-l-2 border-sky-600" key={row.id}>
               {row.getVisibleCells().map((cell) => (
-                <td key={cell.id}>
+                <tr key={cell.id}>
                   {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                </td>
+                </tr>
               ))}
-            </tr>
+            </th>
           ))}
         </tbody>
       </table>

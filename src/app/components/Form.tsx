@@ -34,7 +34,7 @@ const Form = () => {
   return (
     <div>
       <form
-        className="flex flex-col "
+        className="flex flex-col"
         action=""
         onSubmit={(e) => handleSubmit(e)}
       >
