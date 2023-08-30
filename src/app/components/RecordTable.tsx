@@ -86,29 +86,29 @@ const RecordTable = () => {
       <table className="px-3 py-1 flex border-2 border-sky-600 rounded-lg">
         <thead className="px-2">
           {table.getHeaderGroups().map((headerGroup) => (
-            <th key={headerGroup.id}>
+            <tr key={headerGroup.id}>
               {headerGroup.headers.map((header) => (
-                <tr className="truncate" key={header.id}>
+                <th className="truncate flex " key={header.id}>
                   {header.isPlaceholder
                     ? null
                     : flexRender(
                         header.column.columnDef.header,
                         header.getContext()
                       )}
-                </tr>
+                </th>
               ))}
-            </th>
+            </tr>
           ))}
         </thead>
-        <tbody>
+        <tbody className="flex">
           {table.getRowModel().rows.map((row) => (
-            <th className="px-2 border-l-2 border-sky-600" key={row.id}>
+            <tr className="px-2 border-l-2 border-sky-600" key={row.id}>
               {row.getVisibleCells().map((cell) => (
-                <tr key={cell.id}>
+                <th className="flex flex-col" key={cell.id}>
                   {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                </tr>
+                </th>
               ))}
-            </th>
+            </tr>
           ))}
         </tbody>
       </table>
