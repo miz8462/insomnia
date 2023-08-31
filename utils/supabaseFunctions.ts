@@ -5,6 +5,15 @@ export const getAllRecords = async () => {
   return records.data;
 };
 
+export const getNewSevenRecords = async () => {
+  const records = await supabase
+    .from("INSOMNIA_RECORDS")
+    .select("*")
+    .order("createdAt", { ascending: false })
+    .limit(7);
+  return records.data;
+};
+
 export const addRecord = async (
   timeToBed: string,
   wakeUpTime: string,

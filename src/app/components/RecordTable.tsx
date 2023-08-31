@@ -5,33 +5,8 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 import { useEffect, useState } from "react";
-import { getAllRecords } from "../../../utils/supabaseFunctions";
 import { Record } from "../types/types";
-
-const insomniaRecords: Record[] = [
-  {
-    id: 1,
-    createdAt: "2023/08/2",
-    timeToBed: "00:00",
-    wakeUpTime: "08:00",
-    sleepTime: 30,
-    numberOfAwaking: 2,
-    timeOfAwaking: 30,
-    morningFeeling: 3,
-    qualityOfSleep: 3,
-  },
-  {
-    id: 2,
-    createdAt: "2023/08/30",
-    timeToBed: "01:00",
-    wakeUpTime: "07:00",
-    sleepTime: 0,
-    numberOfAwaking: 1,
-    timeOfAwaking: 10,
-    morningFeeling: 4,
-    qualityOfSleep: 5,
-  },
-];
+import { getNewSevenRecords } from "../../../utils/supabaseFunctions";
 
 const columnHelper = createColumnHelper<Record>();
 
@@ -75,7 +50,7 @@ const RecordTable = () => {
 
   useEffect(() => {
     const getRecords = async () => {
-      const records = await getAllRecords();
+      const records = await getNewSevenRecords();
       setData(records!);
     };
     getRecords();
