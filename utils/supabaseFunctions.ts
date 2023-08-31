@@ -8,8 +8,8 @@ export const getAllRecords = async () => {
 export const addRecord = async (
   timeToBed: string,
   wakeUpTime: string,
-  numberOfAwaking: number,
   sleepTime: number,
+  numberOfAwaking: number,
   timeOfAwaking: number,
   morningFeeling: number,
   qualityOfSleep: number
@@ -17,12 +17,12 @@ export const addRecord = async (
   console.log(timeToBed);
 
   await supabase.from("INSOMNIA_RECORDS").insert({
-    time_to_bed: timeToBed,
-    wake_up_time: wakeUpTime,
-    number_of_awaking: numberOfAwaking,
-    sleep_time: sleepTime,
-    time_of_awaking: timeOfAwaking,
-    morning_feeling: morningFeeling,
-    quality_of_sleep: qualityOfSleep,
+    timeToBed: timeToBed,
+    wakeUpTime: wakeUpTime,
+    sleepTime: sleepTime,
+    numberOfAwaking: numberOfAwaking,
+    timeOfAwaking: timeOfAwaking,
+    morningFeeling: morningFeeling,
+    qualityOfSleep: qualityOfSleep,
   });
 };
