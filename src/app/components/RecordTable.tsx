@@ -5,8 +5,8 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 import { useEffect, useState } from "react";
-import { Record } from "../types/types";
 import { getNewSevenRecords } from "../../../utils/supabaseFunctions";
+import { Record } from "../types/types";
 
 const columnHelper = createColumnHelper<Record>();
 
@@ -53,9 +53,10 @@ const RecordTable = () => {
       const records = await getNewSevenRecords();
       setData(records!);
     };
-    getRecords();
-  }, [data]);
-
+    getRecords();    
+  }, []);
+  data.sort((a, b) => a.id - b.id);
+  
   const table = useReactTable({
     data,
     columns,
