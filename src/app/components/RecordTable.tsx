@@ -72,6 +72,7 @@ const columns = [
 
 const RecordTable = () => {
   const [data, setData] = useState<Record[]>([]);
+
   useEffect(() => {
     const getRecords = async () => {
       const records = await getAllRecords();
