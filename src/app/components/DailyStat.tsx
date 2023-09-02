@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { getNewSevenRecords } from "../../../utils/supabaseFunctions";
 import { Record, Stat } from "../types/types";
+import { UUID } from "uuidjs";
 
 const DailyStat = () => {
   const [data, setData] = useState<Record[]>([]);
@@ -37,6 +38,7 @@ const DailyStat = () => {
     const sleepRatio = Math.round((totalSleepTime / totalTimeInBed) * 100);
     // 計算結果で連想配列を作成
     const stat = {
+      id: UUID.generate(),
       totalTimeInBed: totalTimeInBed,
       totalSleepTime: totalSleepTime,
       sleepRatio: sleepRatio,
@@ -56,7 +58,7 @@ const DailyStat = () => {
         </thead>
         <tbody className="flex">
           {statArr.map((stat) => (
-            <tr className="px-3 border-l-2 border-sky-600" key={stat.sleepRatio}>
+            <tr className="px-3 border-l-2 border-sky-600" key={stat.id}>
               <th className="flex flex-col w-12">{stat.totalTimeInBed}</th>
               <th className="flex flex-col w-12">{stat.totalSleepTime}</th>
               <th className="flex flex-col w-12">{stat.sleepRatio}</th>

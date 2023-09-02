@@ -68,6 +68,7 @@ export type Record = {
 };
 
 export type Stat = {
+  id: string;
   totalTimeInBed: number;
   totalSleepTime: number;
   sleepRatio: number;
