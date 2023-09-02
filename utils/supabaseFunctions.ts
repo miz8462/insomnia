@@ -14,6 +14,15 @@ export const getNewSevenRecords = async () => {
   return records.data;
 };
 
+export const getNewThirtyRecords = async () => {
+  const records = await supabase
+    .from("INSOMNIA_RECORDS")
+    .select("*")
+    .order("createdAt", { ascending: false })
+    .limit(30);
+  return records.data;
+};
+
 export const addRecord = async (
   timeToBed: string,
   wakeUpTime: string,
