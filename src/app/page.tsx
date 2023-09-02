@@ -2,6 +2,7 @@
 import Form from "./components/Form";
 import Header from "./components/Header";
 import RecordTable from "./components/RecordTable";
+import Stat from "./components/DailyStat";
 
 export default function Home() {
   return (
@@ -9,7 +10,10 @@ export default function Home() {
       <Header />
       <div className="flex">
         <Form />
-        <RecordTable />
+        <div>
+          <RecordTable />
+          <Stat />
+        </div>
       </div>
     </main>
   );

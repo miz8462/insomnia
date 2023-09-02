@@ -66,3 +66,9 @@ export type Record = {
   morningFeeling: number;
   qualityOfSleep: number;
 };
+
+export type Stat = {
+  totalTimeInBed: number;
+  totalSleepTime: number;
+  sleepRatio: number;
+};

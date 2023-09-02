@@ -66,11 +66,11 @@ const RecordTable = () => {
   return (
     <div className="p-1">
       <table className="px-3 py-1 flex border-2 border-sky-600 rounded-lg">
-        <thead className="px-2">
+        <thead className="pr-4">
           {table.getHeaderGroups().map((headerGroup) => (
             <tr key={headerGroup.id}>
               {headerGroup.headers.map((header) => (
-                <th className="truncate flex " key={header.id}>
+                <th className="truncate flex" key={header.id}>
                   {header.isPlaceholder
                     ? null
                     : flexRender(
@@ -86,7 +86,7 @@ const RecordTable = () => {
           {table.getRowModel().rows.map((row) => (
             <tr className="px-3 border-l-2 border-sky-600" key={row.id}>
               {row.getVisibleCells().map((cell) => (
-                <th className="flex flex-col" key={cell.id}>
+                <th className="flex flex-col w-12" key={cell.id}>
                   {flexRender(cell.column.columnDef.cell, cell.getContext())}
                 </th>
               ))}
