@@ -91,12 +91,10 @@ const RecordTable = () => {
 
   const averageRecords = getAverageRecords(formattedRecords);
 
-  
-
   return (
     <div className="p-1">
       <table className="px-3 py-1 flex border-2 border-sky-600 rounded-lg">
-        <thead className="pr-4">
+        <thead className="pr-4 border-r-2 border-sky-600">
           {columns.map((column) => (
             <tr className="pr-28" key={UUID.generate()}>
               <th className="truncate flex">{column}</th>
@@ -118,7 +116,7 @@ const RecordTable = () => {
           ))}
         </tbody>
         <tfoot className="flex">
-          <tr className="px-3 border-l-2 border-sky-600">
+          <tr className="px-3 border-l-4 border-sky-600">
             <th className="flex flex-col w-12">平均</th>
             <th className="flex flex-col w-12">
               {averageRecords.averageTimeToBed}

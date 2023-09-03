@@ -77,7 +77,7 @@ const DailyStat = () => {
   return (
     <div className="p-1">
       <table className="px-3 py-1 flex border-2 border-sky-600 rounded-lg">
-        <thead className="pr-28">
+        <thead className="pr-28 border-r-2 border-sky-600">
           <tr>
             <th className="truncate flex">総臥床時間</th>
             <th className="truncate flex">総睡眠時間</th>
@@ -94,7 +94,7 @@ const DailyStat = () => {
           ))}
         </tbody>
         <tfoot className="flex">
-          <tr className="px-3 border-l-2 border-sky-600">
+          <tr className="px-3 border-l-4 border-sky-600">
             <th className="flex flex-col w-12">
               {averageRecords.averageTotalTimeInBed}
             </th>
