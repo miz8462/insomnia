@@ -4,19 +4,19 @@ import { getNewSevenRecords } from "../../../utils/supabaseFunctions";
 import { Record, Stat } from "../types/types";
 
 const DailyStat = () => {
-  const [data, setData] = useState<Record[]>([]);
+  const [records, setRecords] = useState<Record[]>([]);
 
   useEffect(() => {
     const getRecords = async () => {
       const records = await getNewSevenRecords();
-      setData(records!);
+      setRecords(records!);
     };
     getRecords();
-  }, []);
-  data.sort((a, b) => a.id - b.id);
+  }, [records]);
+  records.sort((a, b) => a.id - b.id);
 
   const statArr: Stat[] = [];
-  data.map((datum) => {
+  records.map((datum) => {
     // 文字列の時間をNumber型に変更し計算できるようにする
     const strTimeToNum = (strTime: string): number => {
       const hour = strTime.slice(0, 2);
@@ -46,8 +46,6 @@ const DailyStat = () => {
     statArr.push(stat);
   });
 
-  console.log(statArr);
-
   // 週間平均を求める
   const getAverageRecords = (records: any) => {
     let sumTotalTimeInBed = 0;
@@ -63,9 +61,9 @@ const DailyStat = () => {
       counter += 1;
     });
     const averageRecords = {
-      averageTotalTimeInBed: Math.round(sumTotalTimeInBed / counter),
-      averageTotalSleepTime: Math.round(sumTotalSleepTime / counter),
-      averageSleepRatio: Math.round(
+      averageTotalTimeInBed: counter == 0 ? "-" : Math.round(sumTotalTimeInBed / counter),
+      averageTotalSleepTime: counter == 0 ? "-" : Math.round(sumTotalSleepTime / counter),
+      averageSleepRatio: counter == 0 ? "-" : Math.round(
         (sumTotalSleepTime / sumTotalTimeInBed) * 100
       ),
     };
