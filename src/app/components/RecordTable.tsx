@@ -1,98 +1,148 @@
-import {
-  createColumnHelper,
-  flexRender,
-  getCoreRowModel,
-  useReactTable,
-} from "@tanstack/react-table";
 import { useEffect, useState } from "react";
+import { UUID } from "uuidjs";
+import { numToStrTime, strTimeToNum } from "../../../utils/functions";
 import { getNewSevenRecords } from "../../../utils/supabaseFunctions";
 import { Record } from "../types/types";
 
-const columnHelper = createColumnHelper<Record>();
-
 const columns = [
-  columnHelper.accessor("createdAt", {
-    header: "日付",
-    cell: (props) => props.getValue().slice(5, 10).replace("-", "/"),
-  }),
-  columnHelper.accessor("timeToBed", {
-    header: "布団に入った時間",
-    cell: (props) => props.getValue().slice(0, 5),
-  }),
-  columnHelper.accessor("wakeUpTime", {
-    header: "布団から出た時間",
-    cell: (props) => props.getValue().slice(0, 5),
-  }),
-  columnHelper.accessor("sleepTime", {
-    header: "眠るまでの時間",
-    cell: (props) => props.getValue(),
-  }),
-  columnHelper.accessor("numberOfAwaking", {
-    header: "夜中に目覚めた回数",
-    cell: (props) => props.getValue(),
-  }),
-  columnHelper.accessor("timeOfAwaking", {
-    header: "夜中に目覚めていた時間",
-    cell: (props) => props.getValue(),
-  }),
-  columnHelper.accessor("morningFeeling", {
-    header: "起きた時の気分",
-    cell: (props) => props.getValue(),
-  }),
-  columnHelper.accessor("qualityOfSleep", {
-    header: "睡眠の質",
-    cell: (props) => props.getValue(),
-  }),
+  "日付",
+  "布団に入った時間",
+  "布団から出た時間",
+  "眠るまでの時間",
+  "夜中に目覚めた回数",
+  "夜中に目覚めていた時間",
+  "起きた時の気分",
+  "睡眠の質",
 ];
 
 const RecordTable = () => {
-  const [data, setData] = useState<Record[]>([]);
+  const [records, setRecords] = useState<Record[]>([]);
 
   useEffect(() => {
     const getRecords = async () => {
       const records = await getNewSevenRecords();
-      setData(records!);
+      setRecords(records!);
     };
-    getRecords();    
+    getRecords();
   }, []);
-  data.sort((a, b) => a.id - b.id);
-  
-  const table = useReactTable({
-    data,
-    columns,
-    getCoreRowModel: getCoreRowModel(),
+  records.sort((a, b) => a.id - b.id);
+  // 表示するためにレコードの値をフォーマット
+  const formattedRecords = records.map((record) => {
+    Object.keys(record).map((data) => {
+      if (data == "createdAt") {
+        record[data] = record[data].slice(5, 10).replace("-", "/");
+      }
+      if (data == "timeToBed") {
+        record[data] = record[data].slice(0, 5);
+      }
+      if (data == "wakeUpTime") {
+        record[data] = record[data].slice(0, 5);
+      }
+    });
+    return record;
   });
+  // 週間平均を求める
+  const getAverageRecords = (records: Record[]) => {
+    let sumTimeToBed = 0;
+    let sumWakeUpTime = 0;
+    let sumSleepTime = 0;
+    let sumNumberOfAwaking = 0;
+    let sumTimeOfAwaking = 0;
+    let sumMorningFeeling = 0;
+    let sumQualityOfSleep = 0;
+    let counter = 0;
+    records.map((record: Record) => {
+      if (record.timeToBed) {
+        sumTimeToBed += strTimeToNum(record.timeToBed);
+      }
+      if (record.wakeUpTime) {
+        sumWakeUpTime += strTimeToNum(record.wakeUpTime);
+      }
+      if (record.sleepTime) {
+        sumSleepTime += record.sleepTime;
+      }
+      if (record.numberOfAwaking) {
+        sumNumberOfAwaking += record.numberOfAwaking;
+      }
+      if (record.timeOfAwaking) {
+        sumTimeOfAwaking += record.timeOfAwaking;
+      }
+      if (record.morningFeeling) {
+        sumMorningFeeling += record.morningFeeling;
+      }
+      if (record.qualityOfSleep) {
+        sumQualityOfSleep += record.qualityOfSleep;
+      }
+      counter += 1;
+    });
+    const averageRecords = {
+      averageTimeToBed: numToStrTime(Math.round(sumTimeToBed / counter)),
+      averageWakeUpTime: Math.round(sumWakeUpTime / counter),
+      averageSleepTime: Math.round(sumSleepTime / counter),
+      averageNumberOfAwaking: Math.round(sumNumberOfAwaking / counter),
+      averageTimeOfAwaking: Math.round(sumTimeOfAwaking / counter),
+      averageMorningFeeling:
+        Math.round((sumMorningFeeling / counter) * 10) / 10,
+      averageQualityOfSleep:
+        Math.round((sumQualityOfSleep / counter) * 10) / 10,
+    };
+    return averageRecords;
+  };
+
+  const averageRecords = getAverageRecords(formattedRecords);
+
+  
 
   return (
     <div className="p-1">
       <table className="px-3 py-1 flex border-2 border-sky-600 rounded-lg">
         <thead className="pr-4">
-          {table.getHeaderGroups().map((headerGroup) => (
-            <tr key={headerGroup.id}>
-              {headerGroup.headers.map((header) => (
-                <th className="truncate flex" key={header.id}>
-                  {header.isPlaceholder
-                    ? null
-                    : flexRender(
-                        header.column.columnDef.header,
-                        header.getContext()
-                      )}
-                </th>
-              ))}
+          {columns.map((column) => (
+            <tr className="pr-28" key={UUID.generate()}>
+              <th className="truncate flex">{column}</th>
             </tr>
           ))}
         </thead>
         <tbody className="flex">
-          {table.getRowModel().rows.map((row) => (
-            <tr className="px-3 border-l-2 border-sky-600" key={row.id}>
-              {row.getVisibleCells().map((cell) => (
-                <th className="flex flex-col w-12" key={cell.id}>
-                  {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                </th>
-              ))}
+          {formattedRecords.map((record) => (
+            <tr className="px-3 border-l-2 border-sky-600" key={record.id}>
+              <th className="flex flex-col w-12">{record.createdAt}</th>
+              <th className="flex flex-col w-12">{record.timeToBed}</th>
+              <th className="flex flex-col w-12">{record.wakeUpTime}</th>
+              <th className="flex flex-col w-12">{record.sleepTime}</th>
+              <th className="flex flex-col w-12">{record.numberOfAwaking}</th>
+              <th className="flex flex-col w-12">{record.timeOfAwaking}</th>
+              <th className="flex flex-col w-12">{record.morningFeeling}</th>
+              <th className="flex flex-col w-12">{record.qualityOfSleep}</th>
             </tr>
           ))}
         </tbody>
+        <tfoot className="flex">
+          <tr className="px-3 border-l-2 border-sky-600">
+            <th className="flex flex-col w-12">平均</th>
+            <th className="flex flex-col w-12">
+              {averageRecords.averageTimeToBed}
+            </th>
+            <th className="flex flex-col w-12">
+              {averageRecords.averageWakeUpTime}
+            </th>
+            <th className="flex flex-col w-12">
+              {averageRecords.averageSleepTime}
+            </th>
+            <th className="flex flex-col w-12">
+              {averageRecords.averageNumberOfAwaking}
+            </th>
+            <th className="flex flex-col w-12">
+              {averageRecords.averageTimeOfAwaking}
+            </th>
+            <th className="flex flex-col w-12">
+              {averageRecords.averageMorningFeeling}
+            </th>
+            <th className="flex flex-col w-12">
+              {averageRecords.averageQualityOfSleep}
+            </th>
+          </tr>
+        </tfoot>
       </table>
     </div>
   );

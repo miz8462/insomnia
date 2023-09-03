@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
+import { UUID } from "uuidjs";
 import { getNewSevenRecords } from "../../../utils/supabaseFunctions";
 import { Record, Stat } from "../types/types";
-import { UUID } from "uuidjs";
 
 const DailyStat = () => {
   const [data, setData] = useState<Record[]>([]);
@@ -15,7 +15,7 @@ const DailyStat = () => {
   }, []);
   data.sort((a, b) => a.id - b.id);
 
-  const statArr: Stat[]  = [];
+  const statArr: Stat[] = [];
   data.map((datum) => {
     // 文字列の時間をNumber型に変更し計算できるようにする
     const strTimeToNum = (strTime: string): number => {
@@ -44,7 +44,35 @@ const DailyStat = () => {
       sleepRatio: sleepRatio,
     };
     statArr.push(stat);
-  });  
+  });
+
+  console.log(statArr);
+
+  // 週間平均を求める
+  const getAverageRecords = (records: any) => {
+    let sumTotalTimeInBed = 0;
+    let sumTotalSleepTime = 0;
+    let counter = 0;
+    records.map((record: any) => {
+      if (record.totalTimeInBed) {
+        sumTotalTimeInBed += record.totalTimeInBed;
+      }
+      if (record.totalSleepTime) {
+        sumTotalSleepTime += record.totalSleepTime;
+      }
+      counter += 1;
+    });
+    const averageRecords = {
+      averageTotalTimeInBed: Math.round(sumTotalTimeInBed / counter),
+      averageTotalSleepTime: Math.round(sumTotalSleepTime / counter),
+      averageSleepRatio: Math.round(
+        (sumTotalSleepTime / sumTotalTimeInBed) * 100
+      ),
+    };
+    return averageRecords;
+  };
+
+  const averageRecords = getAverageRecords(statArr);
 
   return (
     <div className="p-1">
@@ -65,6 +93,19 @@ const DailyStat = () => {
             </tr>
           ))}
         </tbody>
+        <tfoot className="flex">
+          <tr className="px-3 border-l-2 border-sky-600">
+            <th className="flex flex-col w-12">
+              {averageRecords.averageTotalTimeInBed}
+            </th>
+            <th className="flex flex-col w-12">
+              {averageRecords.averageTotalSleepTime}
+            </th>
+            <th className="flex flex-col w-12">
+              {averageRecords.averageSleepRatio}
+            </th>
+          </tr>
+        </tfoot>
       </table>
     </div>
   );
