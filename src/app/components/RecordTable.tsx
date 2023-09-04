@@ -52,7 +52,7 @@ const RecordTable = () => {
     let sumTimeOfAwaking = 0;
     let sumMorningFeeling = 0;
     let sumQualityOfSleep = 0;
-    let counter = 0;
+    let countDays = 0;
     records.map((record: Record) => {
       if (record.timeToBed) {
         sumTimeToBed += strTimeToNum(record.timeToBed);
@@ -75,26 +75,26 @@ const RecordTable = () => {
       if (record.qualityOfSleep) {
         sumQualityOfSleep += record.qualityOfSleep;
       }
-      counter += 1;
+      countDays += 1;
     });
     const averageRecords = {
       averageTimeToBed:
-        counter == 0 ? "-" : numToStrTime(Math.round(sumTimeToBed / counter)),
+        countDays == 0 ? "-" : numToStrTime(Math.round(sumTimeToBed / countDays)),
       averageWakeUpTime:
-        counter == 0 ? "-" : numToStrTime(Math.round(sumWakeUpTime / counter)),
-      averageSleepTime: counter == 0 ? "-" : Math.round(sumSleepTime / counter),
+        countDays == 0 ? "-" : numToStrTime(Math.round(sumWakeUpTime / countDays)),
+      averageSleepTime: countDays == 0 ? "-" : Math.round(sumSleepTime / countDays),
       averageNumberOfAwaking:
-        counter == 0 ? "-" : Math.round(sumNumberOfAwaking / counter),
+        countDays == 0 ? "-" : Math.round(sumNumberOfAwaking / countDays),
       averageTimeOfAwaking:
-        counter == 0 ? "-" : Math.round(sumTimeOfAwaking / counter),
+        countDays == 0 ? "-" : Math.round(sumTimeOfAwaking / countDays),
       averageMorningFeeling:
-        counter == 0
+        countDays == 0
           ? "-"
-          : Math.round((sumMorningFeeling / counter) * 10) / 10,
+          : Math.round((sumMorningFeeling / countDays) * 10) / 10,
       averageQualityOfSleep:
-        counter == 0
+        countDays == 0
           ? "-"
-          : Math.round((sumQualityOfSleep / counter) * 10) / 10,
+          : Math.round((sumQualityOfSleep / countDays) * 10) / 10,
     };
     return averageRecords;
   };
