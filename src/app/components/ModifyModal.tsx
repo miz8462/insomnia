@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction } from "react";
-import { supabase } from "../../../utils/supabase";
+import { onClickDelete } from "../../../utils/supabaseFunctions";
 
 type Props = {
   id: number;
@@ -11,10 +11,6 @@ const ModifyModal = (props: Props) => {
 
   const closeModal = () => {
     setShow(false);
-  };
-
-  const onClickDelete = async () => {    
-    await supabase.from("INSOMNIA_RECORDS").delete().eq("id", id);
   };
 
   if (show) {
@@ -31,7 +27,7 @@ const ModifyModal = (props: Props) => {
           <p>まどまど</p>
           <button onClick={() => setShow(false)}>LOVE</button>
           <br />
-          <button onClick={onClickDelete}>削除</button>
+          <button onClick={() => onClickDelete(id)}>削除</button>
         </div>
       </div>
     );

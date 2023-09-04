@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { UUID } from "uuidjs";
 import { numToStrTime, strTimeToNum } from "../../../utils/functions";
 import { getNewSevenRecords } from "../../../utils/supabaseFunctions";
@@ -19,7 +19,7 @@ const columns = [
 const RecordTable = () => {
   const [records, setRecords] = useState<Record[]>([]);
   const [showModifyModal, setShowModifyModal] = useState(false);
-  
+
   useEffect(() => {
     const getRecords = async () => {
       const records = await getNewSevenRecords();
@@ -114,10 +114,16 @@ const RecordTable = () => {
         <tbody className="flex">
           {formattedRecords.map((record) => (
             <tr className="px-3 border-l-2 border-sky-600" key={record.id}>
-              <th className="flex flex-col w-12 cursor-pointer" onClick={() => setShowModifyModal(!showModifyModal)}>
-                {record.createdAt}
-                
-              <ModifyModal show={showModifyModal} setShow={setShowModifyModal} id={record.id} />
+              <th
+                className="flex flex-col w-12"
+                onClick={() => setShowModifyModal(!showModifyModal)}
+              >
+                <span className="cursor-pointer">{record.createdAt}</span>
+                <ModifyModal
+                  show={showModifyModal}
+                  setShow={setShowModifyModal}
+                  id={record.id}
+                />
               </th>
               <th className="flex flex-col w-12">{record.timeToBed}</th>
               <th className="flex flex-col w-12">{record.wakeUpTime}</th>

@@ -44,3 +44,7 @@ export const addRecord = async (
     qualityOfSleep: qualityOfSleep,
   });
 };
+
+export const onClickDelete = async (id: number) => {    
+  await supabase.from("INSOMNIA_RECORDS").delete().eq("id", id);
+};
