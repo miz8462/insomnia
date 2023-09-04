@@ -1,15 +1,21 @@
 import { Dispatch, SetStateAction } from "react";
+import { supabase } from "../../../utils/supabase";
 
 type Props = {
+  id: number;
   show: boolean;
   setShow: Dispatch<SetStateAction<boolean>>;
 };
 const ModifyModal = (props: Props) => {
-  const { show, setShow } = props;
+  const { id, show, setShow } = props;
 
   const closeModal = () => {
     setShow(false);
-  }
+  };
+
+  const onClickDelete = async () => {    
+    await supabase.from("INSOMNIA_RECORDS").delete().eq("id", id);
+  };
 
   if (show) {
     return (
@@ -24,6 +30,8 @@ const ModifyModal = (props: Props) => {
         >
           <p>まどまど</p>
           <button onClick={() => setShow(false)}>LOVE</button>
+          <br />
+          <button onClick={onClickDelete}>削除</button>
         </div>
       </div>
     );
