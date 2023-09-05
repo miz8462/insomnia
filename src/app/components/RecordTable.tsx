@@ -3,6 +3,7 @@ import { UUID } from "uuidjs";
 import { getAverageRecords } from "../../../utils/functions";
 import { getNewSevenRecords } from "../../../utils/supabaseFunctions";
 import { Record } from "../types/types";
+import DailyStat from "./DailyStat";
 import ModifyModal from "./ModifyModal";
 
 const columns = [
@@ -47,76 +48,74 @@ const RecordTable = () => {
   const averageRecords = getAverageRecords(formattedRecords);
 
   return (
-    <div className="p-1">
-      <table className="px-3 py-1 flex border-2 border-sky-600 rounded-lg">
-        <thead className="pr-4 border-r-2 border-sky-600">
-          {columns.map((column) => (
-            <tr className="pr-28" key={UUID.generate()}>
-              <th className="truncate flex">{column}</th>
-            </tr>
-          ))}
-        </thead>
-        <tbody className="flex">
-          {formattedRecords.map((record) => (
-            <tr className="px-3 border-l-2 border-sky-600" key={record.id}>
-              <th className="flex flex-col w-12">
-                {showModifyModal ? (
-                  <>
-                    <span
-                      onClick={() => setShowModifyModal(!showModifyModal)}
-                      className="cursor-pointer"
-                    >
-                      {record.createdAt}
-                    </span>
-                    <ModifyModal setShow={setShowModifyModal} id={record.id} />
-                  </>
-                ) : (
+    <>
+      <div className="p-1">
+        <table className="px-3 py-1 flex border-2 border-sky-600 rounded-lg">
+          <thead className="pr-4 border-r-2 border-sky-600">
+            {columns.map((column) => (
+              <tr className="pr-28" key={UUID.generate()}>
+                <th className="truncate flex">{column}</th>
+              </tr>
+            ))}
+          </thead>
+          <tbody className="flex">
+            {formattedRecords.map((record) => (
+              <tr className="px-3 border-l-2 border-sky-600" key={record.id}>
+                <th className="flex flex-col w-12">
                   <span
-                    onClick={() => setShowModifyModal(!showModifyModal)}
+                    onClick={() => setShowModifyModal(true)}
                     className="cursor-pointer"
                   >
                     {record.createdAt}
                   </span>
-                )}
+                  {showModifyModal && (
+                    <ModifyModal
+                      setShow={setShowModifyModal}
+                      setRecords={setRecords}
+                      id={record.id}
+                    />
+                  )}
+                </th>
+                <th className="flex flex-col w-12">{record.timeToBed}</th>
+                <th className="flex flex-col w-12">{record.wakeUpTime}</th>
+                <th className="flex flex-col w-12">{record.sleepTime}</th>
+                <th className="flex flex-col w-12">{record.numberOfAwaking}</th>
+                <th className="flex flex-col w-12">{record.timeOfAwaking}</th>
+                <th className="flex flex-col w-12">{record.morningFeeling}</th>
+                <th className="flex flex-col w-12">{record.qualityOfSleep}</th>
+              </tr>
+            ))}
+          </tbody>
+          <tfoot className="flex">
+            <tr className="px-3 border-l-4 border-sky-600">
+              <th className="flex flex-col w-12">平均</th>
+              <th className="flex flex-col w-12">
+                {averageRecords.averageTimeToBed}
               </th>
-              <th className="flex flex-col w-12">{record.timeToBed}</th>
-              <th className="flex flex-col w-12">{record.wakeUpTime}</th>
-              <th className="flex flex-col w-12">{record.sleepTime}</th>
-              <th className="flex flex-col w-12">{record.numberOfAwaking}</th>
-              <th className="flex flex-col w-12">{record.timeOfAwaking}</th>
-              <th className="flex flex-col w-12">{record.morningFeeling}</th>
-              <th className="flex flex-col w-12">{record.qualityOfSleep}</th>
+              <th className="flex flex-col w-12">
+                {averageRecords.averageWakeUpTime}
+              </th>
+              <th className="flex flex-col w-12">
+                {averageRecords.averageSleepTime}
+              </th>
+              <th className="flex flex-col w-12">
+                {averageRecords.averageNumberOfAwaking}
+              </th>
+              <th className="flex flex-col w-12">
+                {averageRecords.averageTimeOfAwaking}
+              </th>
+              <th className="flex flex-col w-12">
+                {averageRecords.averageMorningFeeling}
+              </th>
+              <th className="flex flex-col w-12">
+                {averageRecords.averageQualityOfSleep}
+              </th>
             </tr>
-          ))}
-        </tbody>
-        <tfoot className="flex">
-          <tr className="px-3 border-l-4 border-sky-600">
-            <th className="flex flex-col w-12">平均</th>
-            <th className="flex flex-col w-12">
-              {averageRecords.averageTimeToBed}
-            </th>
-            <th className="flex flex-col w-12">
-              {averageRecords.averageWakeUpTime}
-            </th>
-            <th className="flex flex-col w-12">
-              {averageRecords.averageSleepTime}
-            </th>
-            <th className="flex flex-col w-12">
-              {averageRecords.averageNumberOfAwaking}
-            </th>
-            <th className="flex flex-col w-12">
-              {averageRecords.averageTimeOfAwaking}
-            </th>
-            <th className="flex flex-col w-12">
-              {averageRecords.averageMorningFeeling}
-            </th>
-            <th className="flex flex-col w-12">
-              {averageRecords.averageQualityOfSleep}
-            </th>
-          </tr>
-        </tfoot>
-      </table>
-    </div>
+          </tfoot>
+        </table>
+      </div>
+      <DailyStat setShow={showModifyModal} />
+    </>
   );
 };
 

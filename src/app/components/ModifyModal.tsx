@@ -1,16 +1,28 @@
 import { Dispatch, SetStateAction } from "react";
-import { deleteRecord } from "../../../utils/supabaseFunctions";
+import {
+  deleteRecord,
+  getNewSevenRecords,
+} from "../../../utils/supabaseFunctions";
+import { Record } from "../types/types";
 import Button from "./atom/Button";
 
 type Props = {
   id: number;
   setShow: Dispatch<SetStateAction<boolean>>;
+  setRecords: Dispatch<SetStateAction<Record[]>>;
 };
 const ModifyModal = (props: Props) => {
-  const { id, setShow } = props;
+  const { id, setShow, setRecords } = props;
 
   const closeModal = () => {
     setShow(false);
+  };
+
+  const deleteRecordModal = async () => {
+    deleteRecord(id);
+    setShow(false);
+    const newRecords: any = await getNewSevenRecords();
+    setRecords(newRecords);
   };
 
   return (
@@ -22,7 +34,7 @@ const ModifyModal = (props: Props) => {
         <p>まどまど</p>
         <Button onClick={closeModal}>キャンセル</Button>
         <br />
-        <Button onClick={() => deleteRecord(id)}>削除</Button>
+        <Button onClick={deleteRecordModal}>削除</Button>
       </div>
     </div>
   );

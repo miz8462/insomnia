@@ -2,8 +2,11 @@ import { useEffect, useState } from "react";
 import { UUID } from "uuidjs";
 import { getNewSevenRecords } from "../../../utils/supabaseFunctions";
 import { Record, Stat } from "../types/types";
-
-const DailyStat = () => {
+type Props = {
+  setShow: boolean;
+};
+const DailyStat = (props: Props) => {
+  const { setShow } = props;
   const [records, setRecords] = useState<Record[]>([]);
 
   useEffect(() => {
@@ -12,9 +15,9 @@ const DailyStat = () => {
       setRecords(records!);
     };
     getRecords();
-  }, []);
+  }, [setShow]);
   records.sort((a, b) => a.id - b.id);
-  
+
   const statArr: Stat[] = [];
   records.map((datum) => {
     // 文字列の時間をNumber型に変更し計算できるようにする
@@ -61,11 +64,14 @@ const DailyStat = () => {
       counter += 1;
     });
     const averageRecords = {
-      averageTotalTimeInBed: counter == 0 ? "-" : Math.round(sumTotalTimeInBed / counter),
-      averageTotalSleepTime: counter == 0 ? "-" : Math.round(sumTotalSleepTime / counter),
-      averageSleepRatio: counter == 0 ? "-" : Math.round(
-        (sumTotalSleepTime / sumTotalTimeInBed) * 100
-      ),
+      averageTotalTimeInBed:
+        counter == 0 ? "-" : Math.round(sumTotalTimeInBed / counter),
+      averageTotalSleepTime:
+        counter == 0 ? "-" : Math.round(sumTotalSleepTime / counter),
+      averageSleepRatio:
+        counter == 0
+          ? "-"
+          : Math.round((sumTotalSleepTime / sumTotalTimeInBed) * 100),
     };
     return averageRecords;
   };

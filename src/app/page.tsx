@@ -12,7 +12,6 @@ export default function Home() {
         <Form />
         <div>
           <RecordTable />
-          <DailyStat />
         </div>
       </div>
     </main>
