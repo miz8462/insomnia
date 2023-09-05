@@ -36,6 +36,6 @@ export const addRecord = async (
   });
 };
 
-export const onClickDelete = async (id: number) => {
+export const deleteRecord = async (id: number) => {
   await supabase.from("INSOMNIA_RECORDS").delete().eq("id", id);
 };
