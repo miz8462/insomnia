@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { UUID } from "uuidjs";
-import { numToStrTime, strTimeToNum } from "../../../utils/functions";
+import { getAverageRecords, numToStrTime, strTimeToNum } from "../../../utils/functions";
 import { getNewSevenRecords } from "../../../utils/supabaseFunctions";
 import { Record } from "../types/types";
 import ModifyModal from "./ModifyModal";
@@ -44,66 +44,6 @@ const RecordTable = () => {
     return record;
   });
   // 週間平均を求める
-  const getAverageRecords = (records: Record[]) => {
-    let sumTimeToBed = 0;
-    let sumWakeUpTime = 0;
-    let sumSleepTime = 0;
-    let sumNumberOfAwaking = 0;
-    let sumTimeOfAwaking = 0;
-    let sumMorningFeeling = 0;
-    let sumQualityOfSleep = 0;
-    let countDays = 0;
-    records.map((record: Record) => {
-      if (record.timeToBed) {
-        sumTimeToBed += strTimeToNum(record.timeToBed);
-      }
-      if (record.wakeUpTime) {
-        sumWakeUpTime += strTimeToNum(record.wakeUpTime);
-      }
-      if (record.sleepTime) {
-        sumSleepTime += record.sleepTime;
-      }
-      if (record.numberOfAwaking) {
-        sumNumberOfAwaking += record.numberOfAwaking;
-      }
-      if (record.timeOfAwaking) {
-        sumTimeOfAwaking += record.timeOfAwaking;
-      }
-      if (record.morningFeeling) {
-        sumMorningFeeling += record.morningFeeling;
-      }
-      if (record.qualityOfSleep) {
-        sumQualityOfSleep += record.qualityOfSleep;
-      }
-      countDays += 1;
-    });
-    const averageRecords = {
-      averageTimeToBed:
-        countDays == 0
-          ? "-"
-          : numToStrTime(Math.round(sumTimeToBed / countDays)),
-      averageWakeUpTime:
-        countDays == 0
-          ? "-"
-          : numToStrTime(Math.round(sumWakeUpTime / countDays)),
-      averageSleepTime:
-        countDays == 0 ? "-" : Math.round(sumSleepTime / countDays),
-      averageNumberOfAwaking:
-        countDays == 0 ? "-" : Math.round(sumNumberOfAwaking / countDays),
-      averageTimeOfAwaking:
-        countDays == 0 ? "-" : Math.round(sumTimeOfAwaking / countDays),
-      averageMorningFeeling:
-        countDays == 0
-          ? "-"
-          : Math.round((sumMorningFeeling / countDays) * 10) / 10,
-      averageQualityOfSleep:
-        countDays == 0
-          ? "-"
-          : Math.round((sumQualityOfSleep / countDays) * 10) / 10,
-    };
-    return averageRecords;
-  };
-
   const averageRecords = getAverageRecords(formattedRecords);
 
   return (
@@ -120,17 +60,27 @@ const RecordTable = () => {
           {formattedRecords.map((record) => (
             <tr className="px-3 border-l-2 border-sky-600" key={record.id}>
               <th className="flex flex-col w-12">
-                <span
-                  onClick={() => setShowModifyModal(!showModifyModal)}
-                  className="cursor-pointer"
-                >
-                  {record.createdAt}
-                </span>
-                <ModifyModal
-                  show={showModifyModal}
-                  setShow={setShowModifyModal}
-                  id={record.id}
-                />
+                {showModifyModal ? (
+                  <>
+                    <span
+                      onClick={() => setShowModifyModal(!showModifyModal)}
+                      className="cursor-pointer"
+                    >
+                      {record.createdAt}
+                    </span>
+                    <ModifyModal
+                      setShow={setShowModifyModal}
+                      id={record.id}
+                    />
+                  </>
+                ) : (
+                  <span
+                    onClick={() => setShowModifyModal(!showModifyModal)}
+                    className="cursor-pointer"
+                  >
+                    {record.createdAt}
+                  </span>
+                )}
               </th>
               <th className="flex flex-col w-12">{record.timeToBed}</th>
               <th className="flex flex-col w-12">{record.wakeUpTime}</th>
