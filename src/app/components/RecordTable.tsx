@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { UUID } from "uuidjs";
-import { getAverageRecords, numToStrTime, strTimeToNum } from "../../../utils/functions";
+import { getAverageRecords } from "../../../utils/functions";
 import { getNewSevenRecords } from "../../../utils/supabaseFunctions";
 import { Record } from "../types/types";
 import ModifyModal from "./ModifyModal";
@@ -26,7 +26,7 @@ const RecordTable = () => {
       setRecords(records!);
     };
     getRecords();
-  }, []);
+  }, [showModifyModal]);
   records.sort((a, b) => a.id - b.id);
   // 表示するためにレコードの値をフォーマット
   const formattedRecords = records.map((record) => {
@@ -68,10 +68,7 @@ const RecordTable = () => {
                     >
                       {record.createdAt}
                     </span>
-                    <ModifyModal
-                      setShow={setShowModifyModal}
-                      id={record.id}
-                    />
+                    <ModifyModal setShow={setShowModifyModal} id={record.id} />
                   </>
                 ) : (
                   <span
