@@ -1,6 +1,6 @@
 import { FormEvent, useState } from "react";
 import { addRecord } from "../../../utils/supabaseFunctions";
-import SubmitButton from "./atom/SubmitButton";
+import Button from "./atom/Button";
 import MorningFeeling from "./organisms/MorningFeeling";
 import NumberOfAwaking from "./organisms/NumberOfAwaking";
 import QualityOfSleep from "./organisms/QualityOfSleep";
@@ -31,6 +31,8 @@ const Form = () => {
       qualityOfSleep
     );
   };
+
+  const buttonChild = "登録";
   return (
     <div>
       <form
@@ -54,7 +56,7 @@ const Form = () => {
           stateName={qualityOfSleep}
           setState={setQualityOfSleep}
         />
-        <SubmitButton />
+        <Button>登録</Button>
       </form>
     </div>
   );

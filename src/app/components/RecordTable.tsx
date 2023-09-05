@@ -26,7 +26,7 @@ const RecordTable = () => {
       setRecords(records!);
     };
     getRecords();
-  }, [records]);
+  }, []);
   records.sort((a, b) => a.id - b.id);
   // 表示するためにレコードの値をフォーマット
   const formattedRecords = records.map((record) => {
@@ -79,10 +79,15 @@ const RecordTable = () => {
     });
     const averageRecords = {
       averageTimeToBed:
-        countDays == 0 ? "-" : numToStrTime(Math.round(sumTimeToBed / countDays)),
+        countDays == 0
+          ? "-"
+          : numToStrTime(Math.round(sumTimeToBed / countDays)),
       averageWakeUpTime:
-        countDays == 0 ? "-" : numToStrTime(Math.round(sumWakeUpTime / countDays)),
-      averageSleepTime: countDays == 0 ? "-" : Math.round(sumSleepTime / countDays),
+        countDays == 0
+          ? "-"
+          : numToStrTime(Math.round(sumWakeUpTime / countDays)),
+      averageSleepTime:
+        countDays == 0 ? "-" : Math.round(sumSleepTime / countDays),
       averageNumberOfAwaking:
         countDays == 0 ? "-" : Math.round(sumNumberOfAwaking / countDays),
       averageTimeOfAwaking:

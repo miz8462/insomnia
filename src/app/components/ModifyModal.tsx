@@ -1,5 +1,6 @@
 import { Dispatch, SetStateAction } from "react";
 import { onClickDelete } from "../../../utils/supabaseFunctions";
+import Button from "./atom/Button";
 
 type Props = {
   id: number;
@@ -27,7 +28,7 @@ const ModifyModal = (props: Props) => {
           <p>まどまど</p>
           <button onClick={() => setShow(false)}>LOVE</button>
           <br />
-          <button onClick={() => onClickDelete(id)}>削除</button>
+          <Button onClick={() => onClickDelete(id)}>削除</Button>
         </div>
       </div>
     );
