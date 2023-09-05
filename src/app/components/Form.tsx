@@ -9,7 +9,12 @@ import TimeForBed from "./organisms/TimeForBed";
 import TimeOfAwaking from "./organisms/TimeOfAwaking";
 import WakeUpTime from "./organisms/WakeUpTime";
 
-const Form = () => {
+type Props = {
+  buttonText: string;
+};
+
+const Form = (props: Props) => {
+  const { buttonText } = props;
   const [timeToBed, setTimeToBed] = useState<string>("00:00");
   const [wakeUpTime, setWakeUpTime] = useState<string>("07:00");
   const [sleepTime, setSleepTime] = useState<number>(0);
@@ -36,7 +41,7 @@ const Form = () => {
     <div>
       <form
         className="flex flex-col"
-        action="POST"
+        action=""
         onSubmit={(e) => handleSubmit(e)}
       >
         <TimeForBed stateName={timeToBed} setState={setTimeToBed} />
@@ -55,7 +60,7 @@ const Form = () => {
           stateName={qualityOfSleep}
           setState={setQualityOfSleep}
         />
-        <Button>登録</Button>
+        <Button>{buttonText}</Button>
       </form>
     </div>
   );

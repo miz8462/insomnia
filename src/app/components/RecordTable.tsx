@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { UUID } from "uuidjs";
-import { getAverageRecords } from "../../../utils/functions";
+import { formatRecords, getAverageRecords } from "../../../utils/functions";
 import { getNewSevenRecords } from "../../../utils/supabaseFunctions";
 import { Record } from "../types/types";
 import DailyStat from "./DailyStat";
@@ -20,6 +20,7 @@ const columns = [
 const RecordTable = () => {
   const [records, setRecords] = useState<Record[]>([]);
   const [showModifyModal, setShowModifyModal] = useState(false);
+  const [id, setId] = useState<number>(0);
 
   useEffect(() => {
     const getRecords = async () => {
@@ -30,23 +31,14 @@ const RecordTable = () => {
   }, [showModifyModal]);
   records.sort((a, b) => a.id - b.id);
   // 表示するためにレコードの値をフォーマット
-  const formattedRecords = records.map((record) => {
-    Object.keys(record).map((data) => {
-      if (data == "createdAt") {
-        record[data] = record[data].slice(5, 10).replace("-", "/");
-      }
-      if (data == "timeToBed") {
-        record[data] = record[data].slice(0, 5);
-      }
-      if (data == "wakeUpTime") {
-        record[data] = record[data].slice(0, 5);
-      }
-    });
-    return record;
-  });
+  const formattedRecords = formatRecords(records);
   // 週間平均を求める
   const averageRecords = getAverageRecords(formattedRecords);
 
+  const onClickDate = (id: number) => {
+    setShowModifyModal(true);
+    setId(id);
+  };
   return (
     <div>
       <div className="p-1">
@@ -62,18 +54,29 @@ const RecordTable = () => {
             {formattedRecords.map((record) => (
               <tr className="px-3 border-l-2 border-sky-600" key={record.id}>
                 <th className="flex flex-col w-12">
-                  <span
-                    onClick={() => setShowModifyModal(true)}
-                    className="cursor-pointer"
-                  >
-                    {record.createdAt}
-                  </span>
-                  {showModifyModal && (
-                    <ModalForm
-                      setShow={setShowModifyModal}
-                      setRecords={setRecords}
-                      id={record.id}
-                    />
+                  {showModifyModal ? (
+                    <>
+                      <span
+                        onClick={() => onClickDate(record.id)}
+                        className="cursor-pointer"
+                      >
+                        {record.createdAt}
+                      </span>
+                      {showModifyModal && (
+                        <ModalForm
+                          id={id}
+                          setShow={setShowModifyModal}
+                          setRecords={setRecords}
+                        />
+                      )}
+                    </>
+                  ) : (
+                    <span
+                      onClick={() => onClickDate(record.id)}
+                      className="cursor-pointer"
+                    >
+                      {record.createdAt}
+                    </span>
                   )}
                 </th>
                 <th className="flex flex-col w-12">{record.timeToBed}</th>

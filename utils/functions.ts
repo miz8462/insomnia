@@ -72,3 +72,21 @@ export const getAverageRecords = (records: Record[]) => {
   };
   return averageRecords;
 };
+
+export const formatRecords = (records: Record[]): Record[] => {
+  records.map((record) => {
+    Object.keys(record).map((data) => {
+      if (data == "createdAt") {
+        record[data] = record[data].slice(5, 10).replace("-", "/");
+      }
+      if (data == "timeToBed") {
+        record[data] = record[data].slice(0, 5);
+      }
+      if (data == "wakeUpTime") {
+        record[data] = record[data].slice(0, 5);
+      }
+    });
+    return record;
+  });
+  return records;
+};

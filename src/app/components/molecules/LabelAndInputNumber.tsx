@@ -6,7 +6,7 @@ const LabelAndInputNumber = (props: LabelAndInputNumberProps) => {
   const { type, id, name, title, htmlFor, stateName, setState, min, max } =
     props;
   return (
-    <div className="flex flex-col  w-60 py-2">
+    <div className="flex flex-col  w-60 py-2 items-center justify-center">
       <Label htmlFor={htmlFor} title={title} />
       <InputNumber
         type={type}
