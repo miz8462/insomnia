@@ -12,9 +12,9 @@ const DailyStat = () => {
       setRecords(records!);
     };
     getRecords();
-  }, [records]);
+  }, []);
   records.sort((a, b) => a.id - b.id);
-
+  
   const statArr: Stat[] = [];
   records.map((datum) => {
     // 文字列の時間をNumber型に変更し計算できるようにする

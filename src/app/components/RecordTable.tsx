@@ -119,11 +119,13 @@ const RecordTable = () => {
         <tbody className="flex">
           {formattedRecords.map((record) => (
             <tr className="px-3 border-l-2 border-sky-600" key={record.id}>
-              <th
-                className="flex flex-col w-12"
-                onClick={() => setShowModifyModal(!showModifyModal)}
-              >
-                <span className="cursor-pointer">{record.createdAt}</span>
+              <th className="flex flex-col w-12">
+                <span
+                  onClick={() => setShowModifyModal(!showModifyModal)}
+                  className="cursor-pointer"
+                >
+                  {record.createdAt}
+                </span>
                 <ModifyModal
                   show={showModifyModal}
                   setShow={setShowModifyModal}

@@ -32,7 +32,6 @@ const Form = () => {
     );
   };
 
-  const buttonChild = "登録";
   return (
     <div>
       <form
