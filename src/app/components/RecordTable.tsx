@@ -4,7 +4,7 @@ import { getAverageRecords } from "../../../utils/functions";
 import { getNewSevenRecords } from "../../../utils/supabaseFunctions";
 import { Record } from "../types/types";
 import DailyStat from "./DailyStat";
-import ModifyModal from "./ModifyModal";
+import ModalForm from "./ModalForm";
 
 const columns = [
   "日付",
@@ -69,7 +69,7 @@ const RecordTable = () => {
                     {record.createdAt}
                   </span>
                   {showModifyModal && (
-                    <ModifyModal
+                    <ModalForm
                       setShow={setShowModifyModal}
                       setRecords={setRecords}
                       id={record.id}

@@ -36,7 +36,7 @@ const Form = () => {
     <div>
       <form
         className="flex flex-col"
-        action=""
+        action="POST"
         onSubmit={(e) => handleSubmit(e)}
       >
         <TimeForBed stateName={timeToBed} setState={setTimeToBed} />
