@@ -48,7 +48,7 @@ const RecordTable = () => {
   const averageRecords = getAverageRecords(formattedRecords);
 
   return (
-    <>
+    <div>
       <div className="p-1">
         <table className="px-3 py-1 flex border-2 border-sky-600 rounded-lg">
           <thead className="pr-4 border-r-2 border-sky-600">
@@ -115,7 +115,7 @@ const RecordTable = () => {
         </table>
       </div>
       <DailyStat setShow={showModifyModal} />
-    </>
+    </div>
   );
 };
 
