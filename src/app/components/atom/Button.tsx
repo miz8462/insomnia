@@ -1,13 +1,14 @@
 type Props = {
   children: string;
-  onClick?: (e: any) => Promise<void>| void;
+  onClick?: (() => Promise<void>) | (() => void);
 };
 
 const Button = (props: Props) => {
   const { children, onClick } = props;
   return (
     <div className="flex justify-center">
-      <button onClick={onClick}
+      <button
+        onClick={onClick}
         className=" rounded-full bg-blue-500 py-2 px-6 text-white"
         type="submit"
       >
