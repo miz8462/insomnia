@@ -35,6 +35,8 @@ const Form = (props: Props) => {
       morningFeeling,
       qualityOfSleep
     );
+    // ページ遷移
+    document.location.href = "/table"
   };
 
   return (

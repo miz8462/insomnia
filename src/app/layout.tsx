@@ -6,7 +6,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Insomnia",
-  description: "Overcome Insomnia",
+  description: "認知行動療法で不眠症を克服しよう",
 };
 
 export default function RootLayout({

@@ -1,6 +1,6 @@
 type Props = {
   children: string;
-  onClick?: () => Promise<void>| void;
+  onClick?: (e: any) => Promise<void>| void;
 };
 
 const Button = (props: Props) => {
