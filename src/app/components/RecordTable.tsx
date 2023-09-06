@@ -5,8 +5,6 @@ import { getNewSevenRecords } from "../../../utils/supabaseFunctions";
 import { Record } from "../types/types";
 import DailyStat from "./DailyStat";
 import ModalForm from "./ModalForm";
-import Link from "next/link";
-import Button from "./atom/Button";
 
 const columns = [
   "日付",
@@ -120,7 +118,6 @@ const RecordTable = () => {
         </table>
       </div>
       <DailyStat setShow={showModifyModal} />
-      <Link href="/"><Button>戻る</Button></Link>
     </div>
   );
 };

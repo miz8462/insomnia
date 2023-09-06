@@ -8,6 +8,7 @@ import SleepTime from "./organisms/SleepTime";
 import TimeForBed from "./organisms/TimeForBed";
 import TimeOfAwaking from "./organisms/TimeOfAwaking";
 import WakeUpTime from "./organisms/WakeUpTime";
+import Link from "next/link";
 
 type Props = {
   buttonText: string;
