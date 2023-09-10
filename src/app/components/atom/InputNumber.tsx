@@ -13,7 +13,7 @@ const InputNumber = (props: InputNumberProps) => {
         required
         min={min}
         max={max}
-        className="w-16 text-right pr-1 rounded"
+        className="w-16 text-right pr-1 rounded outline-none"
       />
     </div>
   );

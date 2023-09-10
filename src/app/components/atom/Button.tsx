@@ -9,7 +9,7 @@ const Button = (props: Props) => {
     <div className="flex justify-center">
       <button
         onClick={onClick}
-        className=" rounded-full bg-blue-500 py-2 px-6 text-white"
+        className=" rounded-full bg-blue-500 py-2 px-6 text-white hover:bg-blue-700 outline-none focus:bg-blue-700"
         type="submit"
       >
         {children}
