@@ -13,6 +13,7 @@ const InputNumber = (props: InputNumberProps) => {
         required
         min={min}
         max={max}
+        className="w-24 text-right"
       />
     </div>
   );

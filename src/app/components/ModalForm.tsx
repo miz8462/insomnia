@@ -90,7 +90,7 @@ const ModalForm = (props: Props) => {
         className="z-10 w-1/2 h-full p-4 bg-sky-300 rounded-lg"
         onClick={(e) => e.stopPropagation()}
       >
-        <form className="flex flex-col" action="" onSubmit={updateRecordModal}>
+        <form className="flex flex-col  items-center justify-center" action="" onSubmit={updateRecordModal}>
           <TimeForBed stateName={timeToBed} setState={setTimeToBed} />
           <WakeUpTime stateName={wakeUpTime} setState={setWakeUpTime} />
           <SleepTime stateName={sleepTime} setState={setSleepTime} />
@@ -112,9 +112,12 @@ const ModalForm = (props: Props) => {
           />
           <Button>変更</Button>
         </form>
-        <Button onClick={deleteRecordModal}>削除</Button>
-        <br />
-        <Button onClick={closeModal}>キャンセル</Button>
+        <div className="mt-3">
+          <Button onClick={deleteRecordModal}>削除</Button>
+        </div>
+        <div className="mt-3">
+          <Button onClick={closeModal}>キャンセル</Button>
+        </div>
       </div>
     </div>
   );
