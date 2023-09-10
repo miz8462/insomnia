@@ -11,7 +11,7 @@ const InputString = (props: InputStringProps) => {
         id={id}
         name={name}
         required
-        className="w-24 text-right"
+        className="w-16 text-right pr-1 rounded"
       />
     </div>
   );

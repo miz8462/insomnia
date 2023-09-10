@@ -6,7 +6,7 @@ import Button from "./components/atom/Button";
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-28 bg-sky-200">
+    <main className="flex min-h-screen flex-col items-center justify-between p-5 bg-sky-200">
       <Header />
       <Form buttonText="登録" />
       <Link href="/table" className="p-4">
